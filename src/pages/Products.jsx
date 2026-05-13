@@ -8,7 +8,7 @@ const Products = () => {
   const products = useSelector(productList);
   const status = useSelector(selectProductStatus);
   const categories = useSelector(selectProductCategories);
-  
+
   const [notification, setNotification] = useState(null);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -73,16 +73,44 @@ const Products = () => {
         <div className="py-8 md:py-12 px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
             {/* Hero Section */}
-            <section className="mb-10 md:mb-16 rounded-[2rem] bg-[var(--primary-gradient)] px-8 py-12 md:px-14 md:py-16 text-white shadow-2xl relative overflow-hidden animate-slide-up">
+            <section className="mb-10 md:mb-16 rounded-[2rem] bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 px-8 py-12 md:px-14 md:py-16 text-white shadow-2xl relative overflow-hidden animate-slide-up">
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-              <div className="relative z-10 max-w-3xl">
-                <p className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-purple-200 mb-3 drop-shadow-sm">New Season Collection</p>
-                <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 drop-shadow-md">
-                  Smart shopping for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-100">style & essentials.</span>
-                </h1>
-                <p className="text-lg md:text-xl text-purple-100/90 font-medium max-w-xl">
-                  Discover premium products with a smooth mobile experience and fast checkout.
-                </p>
+              <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-[80px] opacity-40"></div>
+              <div className="absolute bottom-[-20%] left-[-10%] w-72 h-72 bg-indigo-500 rounded-full mix-blend-screen filter blur-[80px] opacity-40"></div>
+
+              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div className="max-w-2xl text-center lg:text-left">
+                  <p className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-bold uppercase tracking-wider text-purple-200 mb-6 backdrop-blur-md shadow-sm">✨ New Season Collection</p>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.15] mb-6">
+                    Smart shopping for <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-400 drop-shadow-sm">style & essentials.</span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-slate-300 font-medium max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                    Discover premium products with a smooth mobile experience and fast checkout. Elevate your everyday with our curated selection.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <button onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })} className="px-8 py-3.5 rounded-xl bg-white text-indigo-900 font-bold hover:bg-yellow-50 hover:scale-105 transition-all shadow-lg shadow-white/20">
+                      Shop Now
+                    </button>
+                    <button className="px-8 py-3.5 rounded-xl bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all backdrop-blur-md">
+                      View Offers
+                    </button>
+                  </div>
+                </div>
+
+                {/* Visual Graphic */}
+                <div className="hidden lg:block relative w-80 h-80 xl:w-96 xl:h-96">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400 to-purple-500 rounded-full animate-pulse-soft opacity-30 blur-2xl"></div>
+                  <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Shopping Fashion" className="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-white/10 shadow-2xl z-10" />
+
+                  {/* Floating badges */}
+                  <div className="absolute top-10 -left-6 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-xl z-20 animate-bounce">
+                    <span className="text-3xl">🛍️</span>
+                  </div>
+                  <div className="absolute bottom-10 -right-6 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-xl z-20 animate-bounce" style={{ animationDelay: '1s' }}>
+                    <span className="text-3xl">⭐</span>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -117,11 +145,10 @@ const Products = () => {
                   <button
                     key={category}
                     onClick={() => setFilter(category)}
-                    className={`px-4 py-1.5 rounded-full capitalize text-sm font-medium transition-all duration-300 ${
-                      filter === category 
-                        ? "bg-[var(--primary-gradient)] text-white shadow-md shadow-purple-500/30 scale-105" 
-                        : "bg-white/60 text-slate-600 hover:bg-white hover:shadow-sm"
-                    }`}
+                    className={`px-4 py-1.5 rounded-full capitalize text-sm font-medium transition-all duration-300 ${filter === category
+                      ? "bg-[var(--primary-gradient)] text-blue-800 shadow-md shadow-purple-500/30 scale-105"
+                      : "bg-white/60 text-slate-600 hover:bg-white hover:shadow-sm"
+                      }`}
                   >
                     {category}
                   </button>
@@ -134,11 +161,11 @@ const Products = () => {
               {filteredProducts.map((product) => (
                 <div key={product.id} className="card group flex flex-col h-full bg-white/80 backdrop-blur-sm border-white/40">
                   <div className="relative bg-white rounded-xl p-6 flex items-center justify-center h-64 overflow-hidden mb-5 border border-slate-100 group-hover:border-purple-100 transition-colors">
-                    <img 
-                      src={product.image} 
-                      alt={product.title} 
+                    <img
+                      src={product.image}
+                      alt={product.title}
                       loading="lazy"
-                      className="h-full w-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500 ease-out" 
+                      className="h-full w-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg shadow-sm text-xs font-bold text-slate-700 flex items-center gap-1 border border-slate-100">
                       <span className="text-yellow-400 text-sm">★</span>
@@ -155,8 +182,8 @@ const Products = () => {
                       <div>
                         <p className="text-2xl font-black text-slate-900">${product.price.toFixed(2)}</p>
                       </div>
-                      <button 
-                        onClick={() => handleAddToCart(product)} 
+                      <button
+                        onClick={() => handleAddToCart(product)}
                         className="btn-primary py-2 px-5 text-sm shadow-purple-500/20 hover:shadow-purple-500/40"
                       >
                         Add to Cart
@@ -172,7 +199,7 @@ const Products = () => {
                 <div className="text-6xl mb-6 opacity-50">🔍</div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">No products found</h3>
                 <p className="text-slate-500 text-lg">Try adjusting your search or category filters to find what you're looking for.</p>
-                <button onClick={() => {setSearch(""); setFilter("all");}} className="mt-6 btn-secondary">Clear all filters</button>
+                <button onClick={() => { setSearch(""); setFilter("all"); }} className="mt-6 btn-secondary">Clear all filters</button>
               </div>
             )}
           </div>
